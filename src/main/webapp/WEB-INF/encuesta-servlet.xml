@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:component-scan base-package="ulima.idic.calculatuhuella" />
+	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+	<!--context:load-time-weaver/-->
+
+	<!-- CXF config -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<!-- register restful web service endpoints -->
+	<jaxrs:server id="calculatuhuellaServer" address="/">
+		<jaxrs:serviceBeans>
+			<ref bean="calculatuhuellaResource" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:server>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<!-- TODO: MODIFICAR URL, USERNAME, PASSWORD -->
+		<property name="url" value="jdbc:mysql://192.168.56.101:3306/calculatuhuella" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<!-- TODO: COMENTAR-->
+	<!--
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath:_TMP/_DATABASE/01.create-schema.sql" />
+		<jdbc:script location="classpath:_TMP/_DATABASE/02.load-data.sql" />
+		<jdbc:script location="classpath:_TMP/_DATABASE/03.views.sql" />
+	</jdbc:initialize-database>
+	-->
+
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="calculatuhuella" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<!--property name="loadTimeWeaver">
+         	<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
+         	<bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver" />
+        </property-->
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<!--prop key="hibernate.use_sql_comments">true</prop-->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>      
+	</bean>
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<!-- Se cambia a Hibernate -->
+	<!--bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+   		<property name="databasePlatform" value="org.eclipse.persistence.platform.database.MySQLPlatform" />
+   		<property name="showSql" value="true" />
+	</bean-->
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+
+	<!-- Configure to plugin JSON as request and response in method handler -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonMessageConverter"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Configure bean to convert JSON to POJO and vice versa -->
+	<bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</bean>	
+</beans>

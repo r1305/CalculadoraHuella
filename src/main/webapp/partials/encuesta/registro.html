@@ -1,0 +1,27 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">Registro Encuesta</div>
+    <form class="form-horizontal" ng-submit="siguiente()">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Distrito:</label>
+            <div class="col-sm-10">
+                <select name="distrito" ng-model="distritoSeleccionado" ng-options="distrito.nombre  for distrito in distritos" required="required" title="Seleccione Distrito">
+                    <option value="">--Seleccione--</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Correo:</label>
+            <div class="col-sm-10">
+                <input name="amount" type="email" title="Ingrese su correo electronico" required="required" ng-model="encuesta.email" />
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <!--a ui-sref="accounts" class="btn btn-small btn-primary">Cancel</a-->
+                <input type="submit" class="btn btn-small btn-primary" value="Iniciar Encuesta"></input>
+            </div>
+        </div>
+    </form>
+</div>

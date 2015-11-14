@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<!--persistence-unit name="calculatuhuella" transaction-type="RESOURCE_LOCAL"-->
+	<persistence-unit name="calculatuhuella">
+		<!--provider>org.hibernate.jpa.HibernatePersistenceProvider</provider-->
+		<!--provider>org.eclipse.persistence.jpa.PersistenceProvider</provider-->
+		<!-- Se comenta par tomcat -->
+		<!--non-jta-data-source>jdbc/idic2Datasource</non-jta-data-source -->
+		<class>ulima.idic.calculatuhuella.domain.Distrito</class>
+		<class>ulima.idic.calculatuhuella.domain.InformacionInei</class>
+		<class>ulima.idic.calculatuhuella.domain.DetalleEncuestaPersona</class>
+		<class>ulima.idic.calculatuhuella.domain.DetalleEncuesta</class>
+		<class>ulima.idic.calculatuhuella.domain.DetalleEncuestaElectricidad</class>
+		<class>ulima.idic.calculatuhuella.domain.DetalleEncuestaResiduoSolido</class>
+		<class>ulima.idic.calculatuhuella.domain.DetalleEncuestaTransporte</class>
+		<class>ulima.idic.calculatuhuella.domain.Encuesta</class>
+		<!--class>ulima.idic.calculatuhuella.domain.DispositivosElectricosCO2</class-->
+		<!--exclude-unlisted-classes>false</exclude-unlisted-classes-->
+		<properties>
+
+			<!-- Tomcat -->
+			<!--
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.1.46:3306/151111" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="root" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			-->
+
+			<!-- Tomcat/Glassfish -->
+			<!--property name="eclipselink.target-server" value="SunAS9"/ -->
+			<!--
+			<property name="eclipselink.logging.level" value="ALL" />
+			<property name="eclipselink.logging.level.sql" value="FINE" />
+			<property name="eclipselink.logging.parameters" value="true" />
+			<property name="eclipselink.logging.connection" value="true" />
+			<property name="eclipselink.logging.session" value="true" />
+			<property name="eclipselink.logging.thread" value="true" />
+			<property name="eclipselink.logging.timestamp" value="true" />
+			-->
+			<!-- Evitar error:? IllegalStateException: Cannot apply class transformer without LoadTimeWeaver specified  -->
+			<!--property name="eclipselink.weaving" value="false"/-->
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%4p-%d{yyyy.MM.dd HH:mm:ss.SSS}-%t] %C{2}.%M: (%F:%L) %n%m%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="STDOUT" />
+		</Root>
+		<logger name="ulima.idic" level="debug">
+			<AppenderRef ref="STDOUT" />
+		</logger>
+		<!--
+		<logger name="org.hibernate.SQL" level="debug">
+			<AppenderRef ref="STDOUT" />
+		</logger>		
+		<logger name="org.hibernate.type" level="trace">
+			<AppenderRef ref="STDOUT" />
+		</logger>
+		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace">
+			<AppenderRef ref="STDOUT" />
+		</logger>
+		-->
+	</Loggers>
+</Configuration>

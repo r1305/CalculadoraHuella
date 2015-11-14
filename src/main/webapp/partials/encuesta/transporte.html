@@ -1,0 +1,55 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">TRANSPORTE</div>
+    <form class="form-horizontal" ng-submit="agregarEncuestaTransporte()">
+        <div class="form-group">
+            <label class="col-sm-8 control-label">En sus desplazamientos hacia y desde su centro laboral. Señale la cantidad de viajes, que usted realiza cada SEMANA, en cada uno de los siguientes medios de transporte, así como el tiempo aproximado, en minutos, de duración de cada viaje.</label>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="categoriaSemanal">Transporte Público</label>
+            <div class="col-sm-10">
+                <select name="transportePublico" ng-model="transportePublicoSeleccionado" ng-options="transportePublico.nombre  for transportePublico in transportes | filter:{categoriaId:1} track by transportePublico.id">
+                	<option value="">--Seleccionar--</option>
+                </select>
+				<input type="text" name="cantidadViajes" ng-model="transportePublico.cantidadViajes"/>
+				<input type="text" name="tiempoUso" ng-model="transportePublico.tiempoUso"/>
+                <button type="button" class="btn btn-small" ng-click="ageregarTransporte(1, transportePublico)">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="categoriaSemanal">Transporte Privado - Empresarial</label>
+            <div class="col-sm-10">
+                <select name="transporteEmpresa" ng-model="transporteEmpresaSeleccionado" ng-options="transporteEmpresa.nombre  for transporteEmpresa in transportes | filter:{categoriaId:2}">
+                	<option value="">--Seleccionar--</option>
+                </select>
+				<input type="text" name="cantidadViajes" ng-model="transporteEmpresa.cantidadViajes"/>
+				<input type="text" name="tiempoUso" ng-model="transporteEmpresa.tiempoUso"/>
+                <button type="button" class="btn btn-small" ng-click="ageregarTransporte(2, transporteEmpresa)">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="categoriaSemanal">Transporte Privado - Propio</label>
+            <div class="col-sm-10">
+                <select name="transportePropio" ng-model="transportePropioSeleccionado" ng-options="transportePropio.nombre  for transportePropio in transportes | filter:{categoriaId:3}">
+                	<option value="">--Seleccionar--</option>
+                </select>
+				<input type="text" name="cantidadViajes" ng-model="transportePropio.cantidadViajes"/>
+				<input type="text" name="tiempoUso" ng-model="transportePropio.tiempoUso"/>
+                <button type="button" class="btn btn-small" ng-click="ageregarTransporte(3, transportePropio)">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+            </div>
+        </div>        
+        <div id="grid1" data-ui-grid="gridOpts" class="grid" ui-grid-selection></div>
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-5">
+                <input type="submit" class="btn btn-small btn-primary" value="Siguiente"></input>
+            </div>
+        </div>
+    </form>
+</div>

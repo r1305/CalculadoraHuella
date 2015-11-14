@@ -1,0 +1,52 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">ENERGÍA ELÉCTRICA</div>
+    <form class="form-horizontal" ng-submit="agregarEncuestaElectricidad()">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="iluminacion">Iluminación</label>
+            <div class="col-sm-10">
+                <select name="iluminacion" ng-model="iluminacionSeleccionado" ng-options="dispositivo.nombre  for dispositivo in dispositivos | filter:{categoriaId:1} track by dispositivo.id">
+                	<option value="">--Seleccionar--</option>
+                </select>
+				<input type="text" name="cantidadDispositivos" ng-model="iluminacion.cantidadDispositivos"/>
+				<input type="text" name="tiempoUso" ng-model="iluminacion.tiempoUso"/>
+                <button type="button" class="btn btn-small" ng-click="ageregarDispositivo(1, iluminacion)">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="equipoContinuo">Electrodomésticos/Equipos - Uso continuo</label>
+            <div class="col-sm-10">
+                <select name="equipoContinuo" ng-model="equipoContinuoSeleccionado" ng-options="dispositivo.nombre  for dispositivo in dispositivos | filter:{categoriaId:2}">
+                	<option value="">--Seleccionar--</option>
+                </select>
+				<input type="text" name="cantidadDispositivos" ng-model="equipoContinuo.cantidadDispositivos"/>
+				<input type="text" name="tiempoUso" ng-model="equipoContinuo.tiempoUso"/>
+                <button type="button" class="btn btn-small" ng-click="ageregarDispositivo(2, equipoContinuo)">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="categoriaSemanal">Electrodomésticos/Equipos - Uso esporádico</label>
+            <div class="col-sm-10">
+                <select name="equipoEsporadico" ng-model="equipoEsporadicoSeleccionado" ng-options="equipoEsporadico.nombre  for equipoEsporadico in dispositivos | filter:{categoriaId:3}">
+                	<option value="">--Seleccionar--</option>
+                </select>
+				<input type="text" name="cantidadDispositivos" ng-model="equipoEsporadico.cantidadDispositivos"/>
+				<input type="text" name="tiempoUso" ng-model="equipoEsporadico.tiempoUso"/>
+                <button type="button" class="btn btn-small" ng-click="ageregarDispositivo(3, equipoEsporadico)">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+            </div>
+        </div>        
+        <div id="grid1" data-ui-grid="gridOpts" class="grid" ui-grid-selection></div>
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-5">
+                <input type="submit" class="btn btn-small btn-primary" value="Siguiente"></input>
+            </div>
+        </div>
+    </form>
+</div>

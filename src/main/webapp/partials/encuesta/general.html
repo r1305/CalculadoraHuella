@@ -1,0 +1,24 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">INFORMACIÓN GENERAL DEL HOGAR</div>
+    <form ng-submit="agregarDetalleEncuesta()">
+        <div class="form-group" ui-i18n="es">
+            <label>1. ¿Cuántas personas residen en el hogar? Indicar según edad y sexo</label>
+            <br/>
+            <div id="grid1" data-ui-grid="gridOpts" class="grid" ui-grid-edit ui-grid-cellnav></div>
+        </div>
+        <div class="form-group">
+            <label>2. Señale aproximadamente el área de terreno de su vivienda</label>
+            <br/>
+            <input name="areaTerreno" type="number" size="7" ng-model="detalleEncuesta.areaTerreno" title="Ingrese Area aproximada de su terreno" required="required" />
+        </div>
+        <div class="form-group">
+            <label>3. Dispone de áreas de jardinería</label>
+            <br/>
+            <input type="checkbox" ng-model="detalleEncuesta.indicadorJardin" ng-true-value="'S'" ng-false-value="'N'" />
+            <input name="areaJardin" type="number" size="5"  ng-model="detalleEncuesta.areaJardin" title="Ingrese Area aproximada de su jardin" />
+        </div>    
+        <hr>
+        	<!--a ui-sref="accounts" class="btn btn-small btn-primary">Cancel</a-->
+            <input type="submit" class="btn btn-small btn-primary" value="Siguiente"></input>
+    </form>
+</div>

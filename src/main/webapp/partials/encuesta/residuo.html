@@ -1,0 +1,57 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">RESIDUOS SÓLIDOS</div>
+    <form class="form-horizontal" ng-submit="finalizar()">
+        <div class="form-group">
+            <label class="col-sm-8 control-label">Señale, aproximadamente, cuántos kilogramos de restos orgánicos (cocina y alimentos) se generan en su hogar cada DÍA.:</label>
+            <div class="col-sm-2">
+            	<input type="text" name="cantidadDiaria"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="categoriaSemanal">Señale, aproximadamente, cuántos de estos tipos de residuos se generan en su hogar cada SEMANA.</label>
+            <div>
+                <select name="categoriaSemanal" ng-model="categoriaSemanalSeleccionado" ng-options="categoria.nombre for categoria in categoriasResiduos | filter:{indicador:2}">
+                	<option value="">--Seleccionar--</option>
+                </select>
+                <select name="residuoSemanal" ng-model="residuoSemanalSeleccionado" ng-options="residuo.nombre for residuo in residuos | filter:{categoriaId:categoriaSemanalSeleccionado.id}">
+                	<option value="">--Seleccionar--</option>
+                </select>
+                <input type="text" name="cantidadResiduoGenerado" ng-model="residuoSemanal.cantidadResiduoGenerado"/>            
+                <button type="button" class="btn btn-small" ng-click="ageregarResiduo(1, residuoSemanal)">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+            </div>
+        </div>
+        <div class="form-group">
+        	<label for="categoriaMensual">Señale, aproximadamente, cuántos de estos tipos de residuos se generan en su hogar cada MES.</label>
+         	<div>
+                <select name="categoriaMensual" ng-model="categoriaMensualSeleccionado" ng-options="categoria.nombre  for categoria in categoriasResiduos| filter:{indicador:3}">
+                	<option value="">--Seleccionar--</option>
+                </select>
+                <select name="residuoMensual" ng-model="residuoMensualSeleccionado" ng-options="residuo.nombre  for residuo in residuos | filter:{categoriaId:categoriaMensualSeleccionado.id}">
+                	<option value="">--Seleccionar--</option>
+                </select>
+                <input type="text" name="cantidadResiduoGenerado" ng-model="residuoMensual.cantidadResiduoGenerado"/>
+                <button type="button" class="btn btn-small" ng-click="ageregarResiduo(2, residuoMensual)">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+         	</div>
+         </div>	
+        <div class="row">
+        	<div class="span4">
+        		<div>Semanal</div>
+        		<div id="grid1" data-ui-grid="gridOpts" class="grid" ui-grid-selection></div>
+        	</div>
+        	<div class="span4">
+        		<div id="grid2" data-ui-grid="gridOpts2" class="grid"></div>
+        	</div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-5">
+                <input type="submit" class="btn btn-small btn-primary" value="Finalizar"></input>
+            </div>
+        </div>
+    </form>
+</div>
